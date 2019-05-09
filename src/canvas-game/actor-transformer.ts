@@ -48,3 +48,54 @@ export class ActorTransformer {
     this.grabbingActorInner.y += delta.y;
   }
 }
+
+/**
+ * Bind game pointer move event to ActorTransformer.
+ *
+ * @param trans
+ * @param game
+ */
+export const setupActorTransformer = (
+  trans: ActorTransformer,
+  game: ex.Engine
+): void => {
+  game.input.pointers.primary.on(
+    "move",
+    (ev): void => {
+      if (!(ev instanceof ex.Input.PointerEvent)) {
+        return;
+      }
+      trans.notifyGrabPointerWasMovedTo(ev.screenPos);
+    }
+  );
+};
+
+/**
+ * Set actor to touched then grabbed.
+ *
+ * @param trans
+ * @param actor
+ */
+export const enableGrabbing = (
+  trans: ActorTransformer,
+  actor: ex.Actor
+): void => {
+  // Enable move event
+  actor.on(
+    "pointerdown",
+    (ev): void => {
+      if (!(ev instanceof ex.Input.PointerEvent)) {
+        return;
+      }
+      trans.grab(actor, ev.screenPos);
+    }
+  );
+  actor.on(
+    "pointerup",
+    (ev): void => {
+      if (ev === undefined) return;
+      trans.release();
+    }
+  );
+  // TODO: enable scaling
+};
