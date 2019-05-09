@@ -1,5 +1,20 @@
 import * as ex from "excalibur";
 
+/**
+ * Transform actor.
+ *
+ * ```typescript
+ * import * as ex from "excalibur";
+ *
+ * const actor = new ex.Actor({ x: 0, y: 0 });
+ * const trans = new ActorTransformer();
+ * trans.grab(actor, ex.Vector(1, 2));
+ * trans.notifyGrabPointerWasMovedTo(ex.Vector(1, 0));
+ * trans.release();
+ * actor.x;  // 0
+ * actor.y;  // -2
+ * ```
+ */
 export class ActorTransformer {
   private grabbingActorInner: ex.Actor | null;
   private currentPointerPosition: ex.Vector | null;
