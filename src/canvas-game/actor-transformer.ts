@@ -16,10 +16,12 @@ import * as ex from "excalibur";
  * ```
  */
 export class ActorTransformer {
+  private previousGrabbedActor: ex.Actor | null;
   private grabbingActorInner: ex.Actor | null;
   private currentPointerPosition: ex.Vector | null;
 
   constructor() {
+    this.previousGrabbedActor = null;
     this.grabbingActorInner = null;
     this.currentPointerPosition = null;
   }
@@ -34,8 +36,17 @@ export class ActorTransformer {
   }
 
   public release(): void {
+    if (this.grabbingActorInner === null) return;
+    this.previousGrabbedActor = this.grabbingActorInner;
     this.grabbingActorInner = null;
     this.currentPointerPosition = null;
+  }
+
+  public addScaleGrabbed(add: number): void {
+    if (this.previousGrabbedActor === null) return;
+    this.previousGrabbedActor.scale = this.previousGrabbedActor.scale.add(
+      new ex.Vector(add, add)
+    );
   }
 
   public notifyGrabPointerWasMovedTo(movedPointerPosition: ex.Vector): void {
@@ -68,6 +79,15 @@ export const setupActorTransformer = (
       trans.notifyGrabPointerWasMovedTo(ev.screenPos);
     }
   );
+
+  game.input.pointers.primary.on("wheel", ev => {
+    if (!(ev instanceof ex.Input.WheelEvent)) {
+      return;
+    }
+    if (ev.deltaY !== 0) {
+      trans.addScaleGrabbed(-ev.deltaY / 5000);
+    }
+  });
 };
 
 /**
