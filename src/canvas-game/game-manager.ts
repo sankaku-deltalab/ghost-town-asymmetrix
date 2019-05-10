@@ -95,6 +95,8 @@ export class GameManager {
 
   public updateCharacterName(name: string): void {}
 
+  public updateMainColor(color: string): void {}
+
   public updateLogoFigure(figPath: string): void {}
 
   public updateCharacterFigure(figPath: string): void {}
