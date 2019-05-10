@@ -1,4 +1,5 @@
 import * as ex from "excalibur";
+import * as mat from "transformation-matrix";
 
 /**
  * Transform actor.
@@ -19,11 +20,15 @@ export class ActorTransformer {
   private previousGrabbedActor: ex.Actor | null;
   private grabbingActorInner: ex.Actor | null;
   private currentPointerPosition: ex.Vector | null;
+  private pinchPointerPosition: ex.Vector | null;
+  private pinchLength: number;
 
   constructor() {
     this.previousGrabbedActor = null;
     this.grabbingActorInner = null;
     this.currentPointerPosition = null;
+    this.pinchPointerPosition = null;
+    this.pinchLength = 0;
   }
 
   public get grabbingActor(): ex.Actor | null {
@@ -31,6 +36,7 @@ export class ActorTransformer {
   }
 
   public grab(grabbedActor: ex.Actor, pointerPosition: ex.Vector): void {
+    if (this.grabbingActorInner !== null) return;
     this.grabbingActorInner = grabbedActor;
     this.currentPointerPosition = pointerPosition;
   }
@@ -43,10 +49,43 @@ export class ActorTransformer {
   }
 
   public addScaleGrabbed(add: number): void {
-    if (this.previousGrabbedActor === null) return;
-    this.previousGrabbedActor.scale = this.previousGrabbedActor.scale.add(
-      new ex.Vector(add, add)
+    if (this.grabbingActorInner !== null) {
+      this.scaleActor(this.grabbingActorInner, add);
+    } else if (this.previousGrabbedActor !== null) {
+      this.scaleActor(this.previousGrabbedActor, add);
+    }
+  }
+
+  private scaleActor(actor: ex.Actor, add: number): void {
+    actor.scale = actor.scale.add(new ex.Vector(add, add));
+  }
+
+  public setPinchTouch(pointerPosition: ex.Vector): void {
+    if (
+      this.grabbingActorInner === null ||
+      this.currentPointerPosition === null
+    )
+      return;
+    this.pinchPointerPosition = pointerPosition;
+    this.pinchLength = pointerPosition.distance(this.currentPointerPosition);
+  }
+
+  public notifySecondPointerMoved(pointerPosition: ex.Vector): void {
+    if (
+      this.grabbingActorInner === null ||
+      this.currentPointerPosition === null
+    )
+      return;
+    const currentPinchLength = pointerPosition.distance(
+      this.currentPointerPosition
     );
+    const scaling = currentPinchLength / this.pinchLength;
+    this.grabbingActorInner.scale = this.grabbingActorInner.scale.scale(
+      scaling
+    );
+
+    this.pinchPointerPosition = pointerPosition;
+    this.pinchLength = currentPinchLength;
   }
 
   public notifyGrabPointerWasMovedTo(movedPointerPosition: ex.Vector): void {
@@ -70,13 +109,33 @@ export const setupActorTransformer = (
   trans: ActorTransformer,
   game: ex.Engine
 ): void => {
-  game.input.pointers.primary.on(
+  game.input.pointers.at(0).on(
     "move",
     (ev): void => {
       if (!(ev instanceof ex.Input.PointerEvent)) {
         return;
       }
       trans.notifyGrabPointerWasMovedTo(ev.screenPos);
+    }
+  );
+
+  game.input.pointers.at(1).on(
+    "down",
+    (ev): void => {
+      if (!(ev instanceof ex.Input.PointerEvent)) {
+        return;
+      }
+      trans.setPinchTouch(ev.screenPos);
+    }
+  );
+
+  game.input.pointers.at(1).on(
+    "move",
+    (ev): void => {
+      if (!(ev instanceof ex.Input.PointerEvent)) {
+        return;
+      }
+      trans.notifySecondPointerMoved(ev.screenPos);
     }
   );
 

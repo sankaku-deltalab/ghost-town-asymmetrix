@@ -8385,6 +8385,11 @@ tr46@^1.0.1:
   dependencies:
     punycode "^2.1.0"
 
+transformation-matrix@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/transformation-matrix/-/transformation-matrix-2.0.0.tgz#e53a3df0a2e3d8f6fe3965bcff4b2ff9100e53db"
+  integrity sha512-OXCsCD8OLuBHP2nthIrSWeALCaxkNWSOGDaOX8BM/BGBIhz88QtjilGbLi9lWYKtUljzdLbezbtsyvO4z293bw==
+
 trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
