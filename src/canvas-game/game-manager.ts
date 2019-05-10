@@ -52,7 +52,7 @@ export class GameManager {
     this.logoActor.setZIndex(5);
 
     // Add character name
-    this.nameActor = this.createCharacterNameActor(frameTrans);
+    this.nameActor = this.createCharacterNameActor(frameSize, frameTrans);
     scene.add(this.nameActor);
     enableGrabbing(trans, this.nameActor);
     this.nameActor.setZIndex(4);
@@ -167,12 +167,16 @@ export class GameManager {
     });
   }
 
-  private createCharacterNameActor(frameTrans: mat.Matrix): GlowTextActor {
+  private createCharacterNameActor(
+    frameSize: ex.Vector,
+    frameTrans: mat.Matrix
+  ): GlowTextActor {
+    const fontSize = 40;
     const namePos = mat.applyToPoint(frameTrans, { x: -0.45, y: -0.125 });
-    return new GlowTextActor("Asuha", {
+    return new GlowTextActor("Asuha", fontSize, {
       x: namePos.x,
       y: namePos.y,
-      scale: new ex.Vector(2, 2),
+      scale: ex.Vector.One.scale(frameSize.x / (8 * fontSize)),
       width: 50,
       height: 50
     });
