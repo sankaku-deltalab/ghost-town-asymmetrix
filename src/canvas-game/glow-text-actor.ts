@@ -11,7 +11,7 @@ export class GlowTextActor extends ex.Actor {
     this.text = text;
     this.anchor = new ex.Vector(0, 1);
     this.rotation = Math.PI / 2;
-    this.setHeight(40);
+    this.setHeight(this.fontSize);
   }
 
   public setText(text: string): void {
