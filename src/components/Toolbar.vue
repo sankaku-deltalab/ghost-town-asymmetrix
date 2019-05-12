@@ -24,12 +24,7 @@
 
 <script lang="ts">
 import { Component, Prop, Emit, Vue } from "vue-property-decorator";
-
-interface MenuItem {
-  id: string;
-  title: string;
-  action: string;
-}
+import { MenuItem } from "../util";
 
 @Component({})
 export default class Toolbar extends Vue {
