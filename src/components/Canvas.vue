@@ -26,10 +26,18 @@ export default class Toolbar extends Vue {
   }
 
   public async exportImageAsCard(): Promise<string> {
-    // 別キャンバスのサイズを変更
+    const frameNW = this.gameManager.getRawFrameNW();
     const frameSize = this.gameManager.getRawFrameSize();
-    this.exportCanvas.width = frameSize.x;
-    this.exportCanvas.height = frameSize.y;
+    return await this.exportImageWithoutFrame(frameNW, frameSize);
+  }
+
+  private async exportImageWithoutFrame(
+    nw: ex.Vector,
+    size: ex.Vector
+  ): Promise<string> {
+    // 別キャンバスのサイズを変更
+    this.exportCanvas.width = size.x;
+    this.exportCanvas.height = size.y;
 
     // キャンバスのフレームを一時的に消す
     await this.gameManager.hideFrame();
@@ -37,18 +45,17 @@ export default class Toolbar extends Vue {
     // フレームが消えたらキャンバスを別キャンバスへコピー
     const ctx = this.exportCanvas.getContext("2d");
     if (ctx === null) throw new Error("can not get exportCanvas context");
-    const frameNW = this.gameManager.getRawFrameNW();
-    ctx.fillRect(0, 0, frameSize.x, frameSize.y);
+    ctx.fillRect(0, 0, size.x, size.y);
     ctx.drawImage(
       this.canvas,
-      frameNW.x,
-      frameNW.y,
-      frameSize.x,
-      frameSize.y,
+      nw.x,
+      nw.y,
+      size.x,
+      size.y,
       0,
       0,
-      frameSize.x,
-      frameSize.y
+      size.x,
+      size.y
     );
 
     // フレームを再表示

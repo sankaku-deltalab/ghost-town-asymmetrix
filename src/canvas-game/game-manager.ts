@@ -100,11 +100,11 @@ export class GameManager {
     this.game.goToScene("main");
   }
 
-  public getRawFrameNW(): mat.Point {
+  public getRawFrameNW(): ex.Vector {
     return this.frameNW.scale(this.game.pixelRatio);
   }
 
-  public getRawFrameSize(): mat.Point {
+  public getRawFrameSize(): ex.Vector {
     return this.frameSize.scale(this.game.pixelRatio);
   }
 
