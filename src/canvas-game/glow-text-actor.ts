@@ -4,10 +4,10 @@ export class GlowTextActor extends ex.Actor {
   private text: string;
   private fontSize: number;
 
-  constructor(text: string, config: ex.IActorArgs) {
+  constructor(text: string, fontSize: number, config: ex.IActorArgs) {
     super(config);
 
-    this.fontSize = 40;
+    this.fontSize = fontSize;
     this.text = text;
     this.anchor = new ex.Vector(0, 1);
     this.rotation = Math.PI / 2;

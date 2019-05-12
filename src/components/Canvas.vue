@@ -6,14 +6,9 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import ToolbarMenu from "./ToolbarMenu.vue";
 import { GameManager } from "../canvas-game/game-manager";
 
-@Component({
-  components: {
-    ToolbarMenu
-  }
-})
+@Component({})
 export default class Toolbar extends Vue {
   private canvas!: HTMLCanvasElement;
   private gameManager!: GameManager;
