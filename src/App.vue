@@ -1,37 +1,55 @@
 <template>
   <v-app>
     <Toolbar v-on:choice-menu="choiceMenu" />
-    <Canvas ref="canvas" />
+    <v-content>
+      <v-container fluid fill-height class="zero-padding">
+        <v-layout justify-center align-center>
+          <v-flex shrink>
+            <Settings v-show="showSettings" />
+            <Canvas v-show="!showSettings" ref="canvas" />
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
   </v-app>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import Toolbar from "./components/Toolbar.vue";
+import Settings from "./components/Settings.vue";
 import Canvas from "./components/Canvas.vue";
 import { MenuItem } from "./util";
 
 @Component({
   components: {
     Toolbar,
+    Settings,
     Canvas
   }
 })
 export default class App extends Vue {
   private canvas!: Canvas;
+  private showSettings: boolean = false;
 
   public mounted(): void {
     this.canvas = this.$refs.canvas as Canvas;
   }
 
   private choiceMenu(item: MenuItem): void {
-    if (item.id === "export_as_card") {
+    if (item.id === "settings") {
+      this.startShowSettings();
+    } else if (item.id === "export_as_card") {
       this.exportImageAsCard();
     } else if (item.id === "export") {
       this.exportImageRaw();
     } else {
       alert(item.title);
     }
+  }
+
+  private startShowSettings(): void {
+    this.showSettings = true;
   }
 
   private async exportImageRaw(): Promise<void> {
@@ -50,3 +68,9 @@ export default class App extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.zero-padding {
+  padding: 0px;
+}
+</style>
