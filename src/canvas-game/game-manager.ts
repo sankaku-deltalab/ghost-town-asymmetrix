@@ -108,6 +108,12 @@ export class GameManager {
     return this.frameSize.scale(this.game.pixelRatio);
   }
 
+  public getRawCanvasSize(): ex.Vector {
+    return new ex.Vector(this.game.drawWidth, this.game.drawHeight).scale(
+      this.game.pixelRatio
+    );
+  }
+
   public async hideFrame(): Promise<void> {
     this.frameActor.visible = false;
     await new Promise(resolve => {

@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import * as ex from "excalibur";
 import { GameManager } from "../canvas-game/game-manager";
 
 @Component({})
@@ -29,6 +30,11 @@ export default class Toolbar extends Vue {
     const frameNW = this.gameManager.getRawFrameNW();
     const frameSize = this.gameManager.getRawFrameSize();
     return await this.exportImageWithoutFrame(frameNW, frameSize);
+  }
+
+  public async exportImageRaw(): Promise<string> {
+    const canvasSize = this.gameManager.getRawCanvasSize();
+    return await this.exportImageWithoutFrame(ex.Vector.Zero, canvasSize);
   }
 
   private async exportImageWithoutFrame(
