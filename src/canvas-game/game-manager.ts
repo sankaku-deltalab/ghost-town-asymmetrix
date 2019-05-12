@@ -16,10 +16,13 @@ import backgroundImage from "@/assets/background_frame_set.png";
 
 export class GameManager {
   private game: ex.Engine;
+  private frameActor: FrameActor;
   private nameActor: GlowTextActor;
   private charActor: FigureActor;
   private mechActor: FigureActor;
   private logoActor: FigureActor;
+  private frameNW: ex.Vector;
+  private frameSize: ex.Vector;
 
   constructor(canvas: HTMLCanvasElement) {
     const game = this.createGame(canvas);
@@ -34,9 +37,13 @@ export class GameManager {
 
     // Add frame
     const [frame, frameTrans] = this.createFrameActor(canvasSize);
+    this.frameActor = frame;
     scene.add(frame);
     frame.setZIndex(5);
     const frameSize = new ex.Vector(frame.getWidth(), frame.getHeight());
+    this.frameSize = frameSize;
+    const frameNW = mat.applyToPoint(frameTrans, { x: -0.5, y: -0.5 });
+    this.frameNW = new ex.Vector(frameNW.x, frameNW.y);
 
     // Add logo
     this.logoActor = this.createFigureActor(
@@ -91,6 +98,35 @@ export class GameManager {
     this.game.addScene("main", scene);
     this.game.start();
     this.game.goToScene("main");
+  }
+
+  public getRawFrameNW(): ex.Vector {
+    return this.frameNW.scale(this.game.pixelRatio);
+  }
+
+  public getRawFrameSize(): ex.Vector {
+    return this.frameSize.scale(this.game.pixelRatio);
+  }
+
+  public getRawCanvasSize(): ex.Vector {
+    return new ex.Vector(this.game.drawWidth, this.game.drawHeight).scale(
+      this.game.pixelRatio
+    );
+  }
+
+  public async hideFrame(): Promise<void> {
+    this.frameActor.visible = false;
+    await new Promise(resolve => {
+      const drawnCallback = (_event?: ex.PostDrawEvent): void => {
+        this.game.off("postdraw", drawnCallback);
+        resolve();
+      };
+      this.game.on("postdraw", drawnCallback);
+    });
+  }
+
+  public unhideFrame(): void {
+    this.frameActor.visible = true;
   }
 
   public updateCharacterName(name: string): void {}
