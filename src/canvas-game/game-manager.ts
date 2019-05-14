@@ -143,16 +143,6 @@ export class GameManager {
     actor.setTexture(imageURL);
   }
 
-  public updateCharacterName(name: string): void {}
-
-  public updateMainColor(color: string): void {}
-
-  public updateLogoFigure(figPath: string): void {}
-
-  public updateCharacterFigure(figPath: string): void {}
-
-  public updateMechFigure(figPath: string): void {}
-
   private createGame(canvas: HTMLCanvasElement): ex.Engine {
     // Override document.getElementById
     // because ex.Engine use it but vue override it
