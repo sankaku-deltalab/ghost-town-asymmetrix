@@ -34,7 +34,8 @@ export default class Toolbar extends Vue {
     { id: "edit", title: "edit", action: "edit" },
     { id: "settings", title: "settings", action: "settings" },
     { id: "export", title: "export", action: "get_app" },
-    { id: "export_as_card", title: "export as card", action: "get_app" }
+    { id: "export_as_card", title: "export as card", action: "get_app" },
+    { id: "license", title: "license", action: "people" }
   ];
 
   private toggleNavigation(): void {

@@ -15,6 +15,7 @@
               v-show="currentPageType === MainPageType.editor"
               ref="canvas"
             />
+            <License v-show="currentPageType === MainPageType.license" />
           </v-flex>
         </v-layout>
       </v-container>
@@ -27,13 +28,15 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import Toolbar from "./components/Toolbar.vue";
 import Settings from "./components/Settings.vue";
 import Canvas from "./components/Canvas.vue";
+import License from "./components/License.vue";
 import { MenuItem, ImageId, MainPageType } from "./util";
 
 @Component({
   components: {
     Toolbar,
     Settings,
-    Canvas
+    Canvas,
+    License
   }
 })
 export default class App extends Vue {
@@ -50,6 +53,8 @@ export default class App extends Vue {
       this.setMainPage(MainPageType.editor);
     } else if (item.id === "settings") {
       this.setMainPage(MainPageType.settings);
+    } else if (item.id === "license") {
+      this.setMainPage(MainPageType.license);
     } else if (item.id === "export_as_card") {
       this.exportImageAsCard();
     } else if (item.id === "export") {
