@@ -8,7 +8,7 @@ export interface FigureActorArgs extends ex.IActorArgs {
 
 export class FigureActor extends ex.Actor {
   private name: string;
-  protected currentTexture: ex.Texture;
+  protected currentTexture!: ex.Texture;
   protected initialSize: { x: number; y: number };
 
   constructor(config: FigureActorArgs) {
@@ -18,7 +18,7 @@ export class FigureActor extends ex.Actor {
     this.color = ex.Color.Magenta;
     this.initialSize = config.initialSize;
 
-    this.currentTexture = this.setTexture(config.defaultFigurePath);
+    this.setTexture(config.defaultFigurePath);
   }
 
   public setTexture(texturePath: string): ex.Texture {
@@ -29,12 +29,13 @@ export class FigureActor extends ex.Actor {
         texture.width / this.initialSize.x,
         texture.height / this.initialSize.y
       );
-      this.addDrawing(texture);
+      this.currentDrawing = texture.asSprite();
       this.setWidth(texture.width);
       this.setHeight(texture.height);
       this.scale = new ex.Vector(1 / textureScale, 1 / textureScale);
     };
     loading();
+    this.currentTexture = texture;
     return texture;
   }
 }
