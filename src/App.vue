@@ -5,7 +5,11 @@
       <v-container fluid fill-height class="zero-padding">
         <v-layout justify-center align-center>
           <v-flex shrink>
-            <Settings v-show="showSettings" v-on:image-change="imageChange" />
+            <Settings
+              v-show="showSettings"
+              v-on:image-change="imageChange"
+              v-on:character-name-change="characterNameChange"
+            />
             <Canvas v-show="!showSettings" ref="canvas" />
           </v-flex>
         </v-layout>
@@ -52,6 +56,10 @@ export default class App extends Vue {
 
   private imageChange(imageId: ImageId, imageURL: string): void {
     this.canvas.imageChange(imageId, imageURL);
+  }
+
+  private characterNameChange(name: string): void {
+    this.canvas.changeCharacterName(name);
   }
 
   private async exportImageRaw(): Promise<void> {

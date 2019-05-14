@@ -143,6 +143,10 @@ export class GameManager {
     actor.setTexture(imageURL);
   }
 
+  public changeCharacterName(name: string): void {
+    this.nameActor.setText(name);
+  }
+
   private createGame(canvas: HTMLCanvasElement): ex.Engine {
     // Override document.getElementById
     // because ex.Engine use it but vue override it

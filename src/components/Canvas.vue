@@ -31,6 +31,10 @@ export default class Toolbar extends Vue {
     this.gameManager.imageChange(imageId, imageURL);
   }
 
+  public changeCharacterName(name: string): void {
+    this.gameManager.changeCharacterName(name);
+  }
+
   public async exportImageAsCard(): Promise<string> {
     const frameNW = this.gameManager.getRawFrameNW();
     const frameSize = this.gameManager.getRawFrameSize();
