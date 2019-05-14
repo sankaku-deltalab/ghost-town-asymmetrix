@@ -3,3 +3,9 @@ export interface MenuItem {
   title: string;
   action: string;
 }
+
+export enum ImageId {
+  titleLogo = "titleLogo",
+  character = "character",
+  mech = "mech"
+}

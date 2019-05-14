@@ -13,6 +13,7 @@ import logoImage from "@/assets/title-logo.png";
 import charImage from "@/assets/f066.png";
 import mechImage from "@/assets/f054.png";
 import backgroundImage from "@/assets/background_frame_set.png";
+import { ImageId } from "@/util";
 
 export class GameManager {
   private game: ex.Engine;
@@ -127,6 +128,19 @@ export class GameManager {
 
   public unhideFrame(): void {
     this.frameActor.visible = true;
+  }
+
+  public imageChange(imageId: ImageId, imageURL: string): void {
+    const actorMap = new Map([
+      [ImageId.titleLogo, this.logoActor],
+      [ImageId.character, this.charActor],
+      [ImageId.mech, this.mechActor]
+    ]);
+    const actor = actorMap.get(imageId);
+    if (actor === undefined) {
+      throw new Error(`imageId ${imageId} is not usable`);
+    }
+    actor.setTexture(imageURL);
   }
 
   public updateCharacterName(name: string): void {}

@@ -8,6 +8,7 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import * as ex from "excalibur";
 import { GameManager } from "../canvas-game/game-manager";
+import { ImageId } from "@/util";
 
 @Component({})
 export default class Toolbar extends Vue {
@@ -24,6 +25,10 @@ export default class Toolbar extends Vue {
     this.gameManager = new GameManager(this.canvas);
 
     this.exportCanvas = document.createElement("canvas");
+  }
+
+  public imageChange(imageId: ImageId, imageURL: string): void {
+    this.gameManager.imageChange(imageId, imageURL);
   }
 
   public async exportImageAsCard(): Promise<string> {
