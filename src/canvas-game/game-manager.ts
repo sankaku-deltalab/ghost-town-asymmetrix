@@ -131,9 +131,16 @@ export class GameManager {
   }
 
   public imageChange(imageId: ImageId, imageURL: string): void {
-    if (imageId === ImageId.character) {
-      this.charActor.setTexture(imageURL);
+    const actorMap = new Map([
+      [ImageId.titleLogo, this.logoActor],
+      [ImageId.character, this.charActor],
+      [ImageId.mech, this.mechActor]
+    ]);
+    const actor = actorMap.get(imageId);
+    if (actor === undefined) {
+      throw new Error(`imageId ${imageId} is not usable`);
     }
+    actor.setTexture(imageURL);
   }
 
   public updateCharacterName(name: string): void {}
