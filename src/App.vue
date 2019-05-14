@@ -6,12 +6,16 @@
         <v-layout justify-center align-center>
           <v-flex shrink>
             <Settings
-              v-show="showSettings"
+              v-show="currentPageType === MainPageType.settings"
               v-on:image-change="imageChange"
               v-on:character-name-change="characterNameChange"
               v-on:color-change="changeColor"
             />
-            <Canvas v-show="!showSettings" ref="canvas" />
+            <Canvas
+              v-show="currentPageType === MainPageType.editor"
+              ref="canvas"
+            />
+            <License v-show="currentPageType === MainPageType.license" />
           </v-flex>
         </v-layout>
       </v-container>
@@ -24,18 +28,21 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import Toolbar from "./components/Toolbar.vue";
 import Settings from "./components/Settings.vue";
 import Canvas from "./components/Canvas.vue";
-import { MenuItem, ImageId } from "./util";
+import License from "./components/License.vue";
+import { MenuItem, ImageId, MainPageType } from "./util";
 
 @Component({
   components: {
     Toolbar,
     Settings,
-    Canvas
+    Canvas,
+    License
   }
 })
 export default class App extends Vue {
+  private MainPageType = MainPageType;
   private canvas!: Canvas;
-  private showSettings: boolean = false;
+  private currentPageType: MainPageType = MainPageType.editor;
 
   public mounted(): void {
     this.canvas = this.$refs.canvas as Canvas;
@@ -43,9 +50,11 @@ export default class App extends Vue {
 
   private choiceMenu(item: MenuItem): void {
     if (item.id === "edit") {
-      this.showSettings = false;
+      this.setMainPage(MainPageType.editor);
     } else if (item.id === "settings") {
-      this.showSettings = true;
+      this.setMainPage(MainPageType.settings);
+    } else if (item.id === "license") {
+      this.setMainPage(MainPageType.license);
     } else if (item.id === "export_as_card") {
       this.exportImageAsCard();
     } else if (item.id === "export") {
@@ -53,6 +62,10 @@ export default class App extends Vue {
     } else {
       alert(item.title);
     }
+  }
+
+  private setMainPage(pageType: MainPageType): void {
+    this.currentPageType = pageType;
   }
 
   private imageChange(imageId: ImageId, imageURL: string): void {

@@ -11,3 +11,9 @@ export enum ImageId {
 }
 
 export const defaultColor = "#7B64FF";
+
+export enum MainPageType {
+  editor = "editor",
+  settings = "settings",
+  license = "license"
+}
