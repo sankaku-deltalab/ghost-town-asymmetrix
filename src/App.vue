@@ -9,6 +9,7 @@
               v-show="showSettings"
               v-on:image-change="imageChange"
               v-on:character-name-change="characterNameChange"
+              v-on:color-change="changeColor"
             />
             <Canvas v-show="!showSettings" ref="canvas" />
           </v-flex>
@@ -60,6 +61,10 @@ export default class App extends Vue {
 
   private characterNameChange(name: string): void {
     this.canvas.changeCharacterName(name);
+  }
+
+  private changeColor(color: string): void {
+    this.canvas.changeColor(color);
   }
 
   private async exportImageRaw(): Promise<void> {

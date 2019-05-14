@@ -14,12 +14,14 @@
     "transformation-matrix": "^2.0.0",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
+    "vue-color": "^2.7.0",
     "vue-property-decorator": "^8.1.0",
     "vuetify": "^1.5.5"
   },
   "devDependencies": {
     "@types/jest": "^24.0.12",
     "@types/lodash": "^4.14.123",
+    "@types/vue-color": "^2.4.2",
     "@vue/cli-plugin-eslint": "^3.7.0",
     "@vue/cli-plugin-typescript": "^3.7.0",
     "@vue/cli-plugin-unit-jest": "^3.7.0",

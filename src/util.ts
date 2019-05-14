@@ -9,3 +9,5 @@ export enum ImageId {
   character = "character",
   mech = "mech"
 }
+
+export const defaultColor = "#7B64FF";

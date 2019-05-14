@@ -2,6 +2,7 @@ import * as ex from "excalibur";
 import { FigureActor } from "./figure-actor";
 import { FigureActorArgs } from "./figure-actor";
 import mechMaskImage from "@/assets/honeycomb_hikari.png";
+import { defaultColor } from "@/util";
 
 export interface MechFigureActorArgs extends FigureActorArgs {
   canvasSize: ex.Vector;
@@ -9,6 +10,7 @@ export interface MechFigureActorArgs extends FigureActorArgs {
 }
 
 export class MechFigureActor extends FigureActor {
+  public maskColor: string;
   private maskImg: HTMLImageElement;
   private canvasSize: ex.Vector;
   private maskSizeMin: ex.Vector;
@@ -19,6 +21,7 @@ export class MechFigureActor extends FigureActor {
     const maskImg = new Image();
     maskImg.src = mechMaskImage;
     this.maskImg = maskImg;
+    this.maskColor = defaultColor;
     this.canvasSize = config.canvasSize;
     this.maskSizeMin = config.maskSizeMin;
   }
@@ -30,7 +33,7 @@ export class MechFigureActor extends FigureActor {
     super.draw(ctx, delta);
 
     // Draw color
-    ctx.fillStyle = "#0000FF55";
+    ctx.fillStyle = this.maskColor + "55";
     ctx.fillRect(0, 0, this.canvasSize.x, this.canvasSize.y);
 
     this.drawMask(ctx);

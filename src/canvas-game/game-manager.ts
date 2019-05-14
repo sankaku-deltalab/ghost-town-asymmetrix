@@ -20,7 +20,7 @@ export class GameManager {
   private frameActor: FrameActor;
   private nameActor: GlowTextActor;
   private charActor: FigureActor;
-  private mechActor: FigureActor;
+  private mechActor: MechFigureActor;
   private logoActor: FigureActor;
   private frameNW: ex.Vector;
   private frameSize: ex.Vector;
@@ -145,6 +145,12 @@ export class GameManager {
 
   public changeCharacterName(name: string): void {
     this.nameActor.setText(name);
+  }
+
+  public changeColor(color: string): void {
+    alert(color);
+    this.nameActor.glowColor = color;
+    this.mechActor.maskColor = color;
   }
 
   private createGame(canvas: HTMLCanvasElement): ex.Engine {
