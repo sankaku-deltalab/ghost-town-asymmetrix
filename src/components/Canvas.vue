@@ -10,6 +10,11 @@ import * as ex from "excalibur";
 import { GameManager } from "../canvas-game/game-manager";
 import { ImageId } from "@/util";
 
+interface NWAndSize {
+  nw: ex.Vector;
+  size: ex.Vector;
+}
+
 @Component({})
 export default class Toolbar extends Vue {
   private canvas!: HTMLCanvasElement;
@@ -42,21 +47,49 @@ export default class Toolbar extends Vue {
   public async exportImageAsCard(): Promise<string> {
     const frameNW = this.gameManager.getRawFrameNW();
     const frameSize = this.gameManager.getRawFrameSize();
-    return await this.exportImageWithoutFrame(frameNW, frameSize);
+    return await this.exportImageWithoutFrame(
+      { nw: frameNW, size: frameSize },
+      ex.Vector.Zero,
+      frameSize
+    );
   }
 
   public async exportImageRaw(): Promise<string> {
     const canvasSize = this.gameManager.getRawCanvasSize();
-    return await this.exportImageWithoutFrame(ex.Vector.Zero, canvasSize);
+    return await this.exportImageWithoutFrame(
+      { nw: ex.Vector.Zero, size: canvasSize },
+      ex.Vector.Zero,
+      canvasSize
+    );
+  }
+
+  public async exportImageAsPhoto(): Promise<string> {
+    const canvasSizePX = this.gameManager.getRawCanvasSize();
+    const src = {
+      nw: ex.Vector.Zero,
+      size: canvasSizePX
+    };
+
+    const photoSizeMilli = new ex.Vector(89, 127);
+    const nesicaSizeMilli = new ex.Vector(55, 85);
+    const nesicaSizePX = this.gameManager.getRawFrameSize();
+    const photoSizePX = new ex.Vector(
+      photoSizeMilli.x * (nesicaSizePX.x / nesicaSizeMilli.x),
+      photoSizeMilli.y * (nesicaSizePX.y / nesicaSizeMilli.y)
+    );
+    const photoNW = photoSizePX.sub(canvasSizePX).scale(0.5);
+
+    return await this.exportImageWithoutFrame(src, photoNW, photoSizePX);
   }
 
   private async exportImageWithoutFrame(
-    nw: ex.Vector,
-    size: ex.Vector
+    src: { nw: ex.Vector; size: ex.Vector },
+    destNW: ex.Vector,
+    exportSize: ex.Vector
   ): Promise<string> {
     // 別キャンバスのサイズを変更
-    this.exportCanvas.width = size.x;
-    this.exportCanvas.height = size.y;
+    this.exportCanvas.width = exportSize.x;
+    this.exportCanvas.height = exportSize.y;
 
     // キャンバスのフレームを一時的に消す
     await this.gameManager.hideFrame();
@@ -64,17 +97,18 @@ export default class Toolbar extends Vue {
     // フレームが消えたらキャンバスを別キャンバスへコピー
     const ctx = this.exportCanvas.getContext("2d");
     if (ctx === null) throw new Error("can not get exportCanvas context");
-    ctx.fillRect(0, 0, size.x, size.y);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(0, 0, exportSize.x, exportSize.y);
     ctx.drawImage(
       this.canvas,
-      nw.x,
-      nw.y,
-      size.x,
-      size.y,
-      0,
-      0,
-      size.x,
-      size.y
+      src.nw.x,
+      src.nw.y,
+      src.size.x,
+      src.size.y,
+      destNW.x,
+      destNW.y,
+      src.size.x,
+      src.size.y
     );
 
     // フレームを再表示

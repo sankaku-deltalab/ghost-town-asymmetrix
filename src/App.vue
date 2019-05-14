@@ -57,6 +57,8 @@ export default class App extends Vue {
       this.setMainPage(MainPageType.license);
     } else if (item.id === "export_as_card") {
       this.exportImageAsCard();
+    } else if (item.id === "export_photo_size") {
+      this.exportImageAsPhotoSize();
     } else if (item.id === "export") {
       this.exportImageRaw();
     } else {
@@ -78,6 +80,10 @@ export default class App extends Vue {
 
   private changeColor(color: string): void {
     this.canvas.changeColor(color);
+  }
+
+  private async exportImageAsPhotoSize(): Promise<void> {
+    this.download("photo.png", await this.canvas.exportImageAsPhoto());
   }
 
   private async exportImageRaw(): Promise<void> {
