@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] -2019-05-15
+### Fix
+- Fix test
+- Fix changelog
+
 ## [0.1.0] -2019-05-14
 ### Added
 - Add editing
@@ -14,5 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Vue initial files
 - Add gitlab CI setting
 
-[Unreleased]: https://github.com/sankaku-deltalab/ghost-town-asymmetrix/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/sankaku-deltalab/ghost-town-asymmetrix/compare/0.1.1...HEAD
+[0.1.1]: https://github.com/sankaku-deltalab/ghost-town-asymmetrix/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/sankaku-deltalab/ghost-town-asymmetrix/releases/tag/0.1.0
