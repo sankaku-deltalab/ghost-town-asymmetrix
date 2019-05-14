@@ -1,25 +1,27 @@
 <template>
-  <v-form>
-    <!-- Character name -->
-    <v-text-field
-      label="Character Name"
-      placeholder="Asuha"
-      v-model="characterName"
-      @change="characterNameChange"
-    />
-    <!-- color -->
-    <v-card>
-      Color
-      <Compact v-model="color" @input="colorUpdate" />
-    </v-card>
-    <ImageUploadButton
-      v-for="info of buttonInfoArray"
-      v-bind:id="info.id"
-      v-bind:name="info.name"
-      v-on:image-change="imageChange"
-      v-bind:key="info.id"
-    />
-  </v-form>
+  <v-flex xs12>
+    <v-form>
+      <!-- Character name -->
+      <v-text-field
+        label="Character Name"
+        placeholder="Asuha"
+        v-model="characterName"
+        @change="characterNameChange"
+      />
+      <!-- color -->
+      <v-card>
+        Color
+        <Compact v-model="color" @input="colorUpdate" />
+      </v-card>
+      <ImageUploadButton
+        v-for="info of buttonInfoArray"
+        v-bind:id="info.id"
+        v-bind:name="info.name"
+        v-on:image-change="imageChange"
+        v-bind:key="info.id"
+      />
+    </v-form>
+  </v-flex>
 </template>
 
 <script lang="ts">
