@@ -33,6 +33,9 @@ describe("ActorTransformer", (): void => {
     const grabPoint = new ex.Vector(0, 0);
     trans.grab(oldActor, grabPoint);
 
+    // And release grabbing actor
+    trans.release();
+
     // And grab second actor
     trans.grab(newActor, grabPoint);
 
