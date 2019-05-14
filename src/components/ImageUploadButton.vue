@@ -42,6 +42,7 @@ export default class ImageUploadButton extends Vue {
       return;
     }
 
+    this.imageName = imageFile.name;
     this.loadImageURL(
       imageFile,
       (url: string): void => {
