@@ -37,8 +37,10 @@ export default class App extends Vue {
   }
 
   private choiceMenu(item: MenuItem): void {
-    if (item.id === "settings") {
-      this.startShowSettings();
+    if (item.id === "edit") {
+      this.showSettings = false;
+    } else if (item.id === "settings") {
+      this.showSettings = true;
     } else if (item.id === "export_as_card") {
       this.exportImageAsCard();
     } else if (item.id === "export") {
@@ -50,10 +52,6 @@ export default class App extends Vue {
 
   private imageChange(imageId: ImageId, imageURL: string): void {
     this.canvas.imageChange(imageId, imageURL);
-  }
-
-  private startShowSettings(): void {
-    this.showSettings = true;
   }
 
   private async exportImageRaw(): Promise<void> {
