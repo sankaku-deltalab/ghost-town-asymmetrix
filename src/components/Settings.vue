@@ -15,6 +15,7 @@
 <script lang="ts">
 import { Component, Prop, Emit, Vue } from "vue-property-decorator";
 import ImageUploadButton from "./ImageUploadButton.vue";
+import { ImageId } from "@/util";
 
 @Component({
   components: {
@@ -22,10 +23,10 @@ import ImageUploadButton from "./ImageUploadButton.vue";
   }
 })
 export default class Settings extends Vue {
-  private buttonInfoArray: { id: string; name: string }[] = [
-    { id: "logo", name: "Title logo" },
-    { id: "character", name: "Character" },
-    { id: "mech", name: "Machine" }
+  private buttonInfoArray: { id: ImageId; name: string }[] = [
+    { id: ImageId.titleLogo, name: "Title logo" },
+    { id: ImageId.character, name: "Character" },
+    { id: ImageId.mech, name: "Back Character" }
   ];
 
   private pickFile() {
@@ -33,7 +34,7 @@ export default class Settings extends Vue {
   }
 
   @Emit()
-  private imageChange(imageId: string, imageURL: string) {}
+  private imageChange(imageId: ImageId, imageURL: string) {}
 }
 </script>
 

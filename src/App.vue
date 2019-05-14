@@ -5,7 +5,7 @@
       <v-container fluid fill-height class="zero-padding">
         <v-layout justify-center align-center>
           <v-flex shrink>
-            <Settings v-show="showSettings" />
+            <Settings v-show="showSettings" v-on:image-change="imageChange" />
             <Canvas v-show="!showSettings" ref="canvas" />
           </v-flex>
         </v-layout>
@@ -19,7 +19,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import Toolbar from "./components/Toolbar.vue";
 import Settings from "./components/Settings.vue";
 import Canvas from "./components/Canvas.vue";
-import { MenuItem } from "./util";
+import { MenuItem, ImageId } from "./util";
 
 @Component({
   components: {
@@ -46,6 +46,10 @@ export default class App extends Vue {
     } else {
       alert(item.title);
     }
+  }
+
+  private imageChange(imageId: ImageId, imageURL: string): void {
+    this.canvas.imageChange(imageId, imageURL);
   }
 
   private startShowSettings(): void {

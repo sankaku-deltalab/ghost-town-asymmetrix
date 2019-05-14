@@ -16,11 +16,11 @@
 
 <script lang="ts">
 import { Component, Prop, Emit, Vue } from "vue-property-decorator";
-import { Promise } from "excalibur";
+import { ImageId } from "@/util";
 
 @Component({})
 export default class ImageUploadButton extends Vue {
-  @Prop() readonly id!: string;
+  @Prop() readonly id!: ImageId;
   @Prop() readonly name!: string;
   private imageName: string = "None";
 
@@ -69,7 +69,7 @@ export default class ImageUploadButton extends Vue {
   }
 
   @Emit()
-  private imageChange(imageId: string, imageURL: string) {}
+  private imageChange(imageId: ImageId, imageURL: string) {}
 }
 </script>
 
