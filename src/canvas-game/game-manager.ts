@@ -143,15 +143,9 @@ export class GameManager {
     actor.setTexture(imageURL);
   }
 
-  public updateCharacterName(name: string): void {}
-
-  public updateMainColor(color: string): void {}
-
-  public updateLogoFigure(figPath: string): void {}
-
-  public updateCharacterFigure(figPath: string): void {}
-
-  public updateMechFigure(figPath: string): void {}
+  public changeCharacterName(name: string): void {
+    this.nameActor.setText(name);
+  }
 
   private createGame(canvas: HTMLCanvasElement): ex.Engine {
     // Override document.getElementById
