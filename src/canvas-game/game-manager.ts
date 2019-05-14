@@ -130,7 +130,11 @@ export class GameManager {
     this.frameActor.visible = true;
   }
 
-  public imageChange(imageId: ImageId, imageURL: string): void {}
+  public imageChange(imageId: ImageId, imageURL: string): void {
+    if (imageId === ImageId.character) {
+      this.charActor.setTexture(imageURL);
+    }
+  }
 
   public updateCharacterName(name: string): void {}
 
