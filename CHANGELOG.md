@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fix
 - Fix production in gitlab pages
 
+### Change
+- Change favicon
+
 ## [0.1.0] -2019-05-15
 ### Fix
 - Fix test
