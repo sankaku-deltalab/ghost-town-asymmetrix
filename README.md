@@ -1,34 +1,5 @@
 # ghost-town-asymmetrix
 
-## Project setup
-```
-yarn install
-```
+ghost-town-asymmetrix is image generator for Nesica.
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Run your unit tests
-```
-yarn run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Use this at [GitLab Pages](https://sankaku-deltalab.gitlab.io/ghost-town-asymmetrix)
