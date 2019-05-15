@@ -148,7 +148,6 @@ export class GameManager {
   }
 
   public changeColor(color: string): void {
-    alert(color);
     this.nameActor.glowColor = color;
     this.mechActor.maskColor = color;
   }
