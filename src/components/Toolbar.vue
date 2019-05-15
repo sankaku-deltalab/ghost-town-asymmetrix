@@ -31,12 +31,16 @@ export default class Toolbar extends Vue {
   private showNavigation: boolean = false;
 
   private items: MenuItem[] = [
-    { id: "edit", title: "edit", action: "edit" },
-    { id: "settings", title: "settings", action: "settings" },
-    { id: "export", title: "export", action: "get_app" },
-    { id: "export_as_card", title: "export as card", action: "get_app" },
-    { id: "export_photo_size", title: "export photo size", action: "get_app" },
-    { id: "license", title: "license", action: "people" }
+    { id: "edit", title: "Edit", action: "edit" },
+    { id: "settings", title: "Settings", action: "settings" },
+    { id: "export", title: "Export", action: "get_app" },
+    { id: "export_as_card", title: "Export as card", action: "get_app" },
+    {
+      id: "export_photo_size",
+      title: "Export in photo size",
+      action: "get_app"
+    },
+    { id: "license", title: "Third Party Licenses", action: "people" }
   ];
 
   private toggleNavigation(): void {
