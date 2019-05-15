@@ -35,7 +35,7 @@ export default class Toolbar extends Vue {
     { id: "settings", title: "Settings", action: "settings" },
     {
       id: "export_photo_size",
-      title: "Export in photo size",
+      title: "Export for photo size print",
       action: "get_app"
     },
     { id: "export_as_card", title: "Export as card", action: "get_app" },
