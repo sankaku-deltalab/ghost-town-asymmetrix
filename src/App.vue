@@ -98,7 +98,7 @@ export default class App extends Vue {
     if (this.showDownloadAlert) {
       this.showDownloadAlert = false;
       alert(
-        "自動的にダウンロードされない場合、表示される画像をダウンロードしてください。"
+        "画像が自動的にダウンロードされない場合、表示される画像をダウンロードしてください。"
       );
     }
     saveAs(url, fileName);
