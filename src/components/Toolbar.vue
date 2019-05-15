@@ -33,13 +33,12 @@ export default class Toolbar extends Vue {
   private items: MenuItem[] = [
     { id: "edit", title: "Edit", action: "edit" },
     { id: "settings", title: "Settings", action: "settings" },
-    { id: "export", title: "Export", action: "get_app" },
-    { id: "export_as_card", title: "Export as card", action: "get_app" },
     {
       id: "export_photo_size",
       title: "Export in photo size",
       action: "get_app"
     },
+    { id: "export_as_card", title: "Export as card", action: "get_app" },
     { id: "license", title: "Third Party Licenses", action: "people" }
   ];
 

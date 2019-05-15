@@ -61,8 +61,6 @@ export default class App extends Vue {
       this.exportImageAsCard();
     } else if (item.id === "export_photo_size") {
       this.exportImageAsPhotoSize();
-    } else if (item.id === "export") {
-      this.exportImageRaw();
     } else {
       alert(item.title);
     }

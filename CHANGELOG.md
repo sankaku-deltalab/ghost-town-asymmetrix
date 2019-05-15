@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Change
 - Change favicon
+- Change Menu to delete raw exporting
 
 ## [0.1.0] -2019-05-15
 ### Fix
