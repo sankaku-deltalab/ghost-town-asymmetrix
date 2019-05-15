@@ -25,6 +25,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { saveAs } from "file-saver";
 import Toolbar from "./components/Toolbar.vue";
 import Settings from "./components/Settings.vue";
 import Canvas from "./components/Canvas.vue";
@@ -43,6 +44,7 @@ export default class App extends Vue {
   private MainPageType = MainPageType;
   private canvas!: Canvas;
   private currentPageType: MainPageType = MainPageType.editor;
+  private showDownloadAlert: boolean = true;
 
   public mounted(): void {
     this.canvas = this.$refs.canvas as Canvas;
@@ -95,10 +97,13 @@ export default class App extends Vue {
   }
 
   private async download(fileName: string, url: string): Promise<void> {
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = fileName;
-    link.click();
+    if (this.showDownloadAlert) {
+      this.showDownloadAlert = false;
+      alert(
+        "自動的にダウンロードされない場合、表示される画像をダウンロードしてください。"
+      );
+    }
+    saveAs(url, fileName);
   }
 }
 </script>
