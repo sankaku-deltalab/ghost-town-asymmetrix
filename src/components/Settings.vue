@@ -13,6 +13,7 @@
         Color
         <Compact v-model="color" @input="colorUpdate" />
       </v-card>
+      <!-- image -->
       <ImageUploadButton
         v-for="info of buttonInfoArray"
         v-bind:id="info.id"
@@ -20,6 +21,11 @@
         v-on:image-change="imageChange"
         v-bind:key="info.id"
       />
+      <!-- return to edit -->
+      <v-btn color="primary" @click="returnToEdit">
+        <v-icon>check</v-icon>
+        Return to edit
+      </v-btn>
     </v-form>
   </v-flex>
 </template>
@@ -70,6 +76,9 @@ export default class Settings extends Vue {
 
   @Emit()
   private characterNameChange(name: string) {}
+
+  @Emit()
+  private returnToEdit() {}
 }
 </script>
 

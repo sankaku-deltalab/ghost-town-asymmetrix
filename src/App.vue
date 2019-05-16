@@ -10,6 +10,7 @@
               v-on:image-change="imageChange"
               v-on:character-name-change="characterNameChange"
               v-on:color-change="changeColor"
+              v-on:return-to-edit="setMainPage(MainPageType.editor)"
             />
             <Canvas
               v-show="currentPageType === MainPageType.editor"
