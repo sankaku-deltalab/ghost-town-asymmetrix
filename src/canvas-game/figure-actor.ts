@@ -9,6 +9,7 @@ export interface FigureActorArgs extends ex.IActorArgs {
 export class FigureActor extends ex.Actor {
   private name: string;
   protected currentTexture!: ex.Texture;
+  private currentTextureScale: number = 1;
   protected initialSize: { x: number; y: number };
 
   constructor(config: FigureActorArgs) {
@@ -25,14 +26,15 @@ export class FigureActor extends ex.Actor {
     const texture = new ex.Texture(texturePath);
     const loading = async () => {
       await texture.load();
-      const textureScale = Math.max(
+      const newTextureScale = Math.max(
         texture.width / this.initialSize.x,
         texture.height / this.initialSize.y
       );
       this.currentDrawing = texture.asSprite();
-      this.setWidth(texture.width);
-      this.setHeight(texture.height);
-      this.scale = new ex.Vector(1 / textureScale, 1 / textureScale);
+      this.setWidth(texture.width * this.scale.x);
+      this.setHeight(texture.height * this.scale.y);
+      this.scale = this.scale.scale(this.currentTextureScale / newTextureScale);
+      this.currentTextureScale = newTextureScale;
     };
     loading();
     this.currentTexture = texture;

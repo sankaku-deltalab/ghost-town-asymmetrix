@@ -10,6 +10,7 @@
               v-on:image-change="imageChange"
               v-on:character-name-change="characterNameChange"
               v-on:color-change="changeColor"
+              v-on:return-to-edit="setMainPage(MainPageType.editor)"
             />
             <Canvas
               v-show="currentPageType === MainPageType.editor"
@@ -97,9 +98,8 @@ export default class App extends Vue {
   private async download(fileName: string, url: string): Promise<void> {
     if (this.showDownloadAlert) {
       this.showDownloadAlert = false;
-      alert(
-        "画像が自動的にダウンロードされない場合、表示される画像をダウンロードしてください。"
-      );
+      alert(`画像をダウンロードします。
+      ダウンロードが始まらない場合、表示される画像をご自身でダウンロードしてください。`);
     }
     saveAs(url, fileName);
   }

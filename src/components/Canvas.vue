@@ -22,7 +22,7 @@ export default class Toolbar extends Vue {
   private gameManager!: GameManager;
 
   public mounted() {
-    const h = this.$parent.$el.clientHeight;
+    const h = this.$parent.$el.clientHeight - 100;
     const w = this.$parent.$el.clientWidth;
     this.canvas = this.$refs.viewerCanvas as HTMLCanvasElement;
     this.canvas.width = w;
@@ -122,7 +122,6 @@ export default class Toolbar extends Vue {
 <style scoped>
 .expanded {
   padding: 0px;
-  height: 100%;
 }
 .viewer-canvas {
   padding: 0px;

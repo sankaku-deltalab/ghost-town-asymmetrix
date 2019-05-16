@@ -42,7 +42,7 @@ export default class ImageUploadButton extends Vue {
       return;
     }
 
-    this.imageName = imageFile.name;
+    this.imageName = this.shortenName(imageFile.name);
     this.loadImageURL(
       imageFile,
       (url: string): void => {
@@ -66,6 +66,12 @@ export default class ImageUploadButton extends Vue {
       onLoad(reader.result);
     };
     reader.readAsDataURL(imageFile);
+  }
+
+  private shortenName(name: string): string {
+    const maxLength = 8;
+    if (name.length <= maxLength) return name;
+    return name.slice(0, 8);
   }
 
   @Emit()
