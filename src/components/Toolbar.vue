@@ -31,14 +31,14 @@ export default class Toolbar extends Vue {
   private showNavigation: boolean = false;
 
   private items: MenuItem[] = [
-    { id: "edit", title: "Edit", action: "edit" },
-    { id: "settings", title: "Settings", action: "settings" },
+    { id: "edit", title: "編集", action: "edit" },
+    { id: "settings", title: "設定", action: "settings" },
     {
       id: "export_photo_size",
-      title: "Export for photo size print",
+      title: "写真印刷用に画像を出力",
       action: "get_app"
     },
-    { id: "export_as_card", title: "Export as card", action: "get_app" },
+    { id: "export_as_card", title: "枠内のみの画像を出力", action: "get_app" },
     { id: "license", title: "Third Party Licenses", action: "people" }
   ];
 
