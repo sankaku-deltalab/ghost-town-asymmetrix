@@ -62,6 +62,8 @@ export default class App extends Vue {
       this.exportImageAsCard();
     } else if (item.id === "export_photo_size") {
       this.exportImageAsPhotoSize();
+    } else if (item.id === "usage") {
+      this.showUsage();
     } else {
       alert(item.title);
     }
@@ -93,6 +95,15 @@ export default class App extends Vue {
 
   private async exportImageAsCard(): Promise<void> {
     this.download("card.png", await this.canvas.exportImageAsCard());
+  }
+
+  private async showUsage(): Promise<void> {
+    alert(`1. カードに使いたい画像をダウンロードしておく。
+    2. 「設定」ページで使用する画像を選ぶ。
+    3. 「編集」ページで画像の移動・拡大をする。
+      - 編集: ドラッグ
+      - 拡大: ピンチ・マウスホイール
+    4. 画像を出力する。`);
   }
 
   private async download(fileName: string, url: string): Promise<void> {

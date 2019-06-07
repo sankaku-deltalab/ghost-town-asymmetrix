@@ -39,6 +39,7 @@ export default class Toolbar extends Vue {
       action: "get_app"
     },
     { id: "export_as_card", title: "枠内のみの画像を出力", action: "get_app" },
+    { id: "usage", title: "使い方", action: "help" },
     { id: "license", title: "Third Party Licenses", action: "people" }
   ];
 

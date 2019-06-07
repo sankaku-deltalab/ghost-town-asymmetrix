@@ -3,7 +3,7 @@
     <v-form>
       <!-- Character name -->
       <v-text-field
-        label="Character Name"
+        label="キャラクター名"
         placeholder="Asuha"
         v-model="characterName"
         @change="characterNameChange"
@@ -24,7 +24,7 @@
       <!-- return to edit -->
       <v-btn color="primary" @click="returnToEdit">
         <v-icon>check</v-icon>
-        Return to edit
+        編集に戻る
       </v-btn>
     </v-form>
   </v-flex>
@@ -54,9 +54,9 @@ export default class Settings extends Vue {
   private characterName: string = "Asuha";
   private color: Color | string = defaultColor;
   private buttonInfoArray: { id: ImageId; name: string }[] = [
-    { id: ImageId.titleLogo, name: "Title logo" },
-    { id: ImageId.character, name: "Character" },
-    { id: ImageId.mech, name: "Back Character" }
+    { id: ImageId.titleLogo, name: "タイトルロゴ" },
+    { id: ImageId.character, name: "キャラクター" },
+    { id: ImageId.mech, name: "背景" }
   ];
 
   private pickFile() {
