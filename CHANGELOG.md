@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] -2019-06-07
+### Added
+- Add usage
+
+### Change
+- Use Japanese instead of English in settings page
+
 ## [0.4.0] -2019-05-16
 ### Change
 - Use Japanese instead of English
@@ -41,7 +48,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Vue initial files
 - Add gitlab CI setting
 
-[Unreleased]: https://github.com/sankaku-deltalab/ghost-town-asymmetrix/compare/0.4.0...HEAD
+[Unreleased]: https://github.com/sankaku-deltalab/ghost-town-asymmetrix/compare/0.5.0...HEAD
+[0.5.0]: https://github.com/sankaku-deltalab/ghost-town-asymmetrix/compare/0.4.0...0.5.0
 [0.4.0]: https://github.com/sankaku-deltalab/ghost-town-asymmetrix/compare/0.3.0...0.4.0
 [0.3.0]: https://github.com/sankaku-deltalab/ghost-town-asymmetrix/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/sankaku-deltalab/ghost-town-asymmetrix/compare/0.1.1...0.2.0
